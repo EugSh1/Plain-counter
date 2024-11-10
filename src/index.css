@@ -1,0 +1,261 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("./assets/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --color-bg: #f9f9ff;
+    --color-fg: #ededf4;
+    --color-text: #1a1c20;
+    --color-accent: #475e8d;
+    --color-accent-darker: #ffffff;
+
+    font-family: "Roboto";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #111318;
+        --color-fg: #1d2023;
+        --color-text: #e2e2e8;
+        --color-accent: #b0c6fb;
+        --color-accent-darker: #152f5c;
+    }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+body {
+    background-color: var(--color-bg);
+}
+
+h1 {
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.counter-card {
+    background-color: var(--color-fg);
+    border-radius: 8px;
+    padding: 16px;
+    width: calc(100% - 8px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.counter-card:first-child {
+    margin-top: 48px;
+}
+
+.counter-card:last-child {
+    margin-bottom: 10px;
+}
+
+.counter-card button,
+.button-create-counter {
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: none;
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+.counter-card button svg,
+.button-create-counter svg {
+    color: var(--color-accent-darker);
+    display: grid;
+    place-items: center;
+}
+
+.counter-name {
+    font-size: 1.5em;
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: transparent;
+    border: none;
+}
+
+.counter-card-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.counter-card-controls h1 {
+    margin: 0;
+}
+
+.counter-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: right;
+    align-items: center;
+}
+
+.counter-options button {
+    background-color: var(--color-fg);
+    filter: brightness(1.25);
+}
+
+.counter-options button svg {
+    color: var(--color-text);
+}
+
+.counters-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.counter-menu {
+    background-color: var(--color-fg);
+    padding: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    pointer-events: none;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.counter-menu-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.counter-menu-closed {
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+}
+
+.counter-menu input {
+    margin: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.counter-menu button {
+    background-color: var(--color-accent);
+    color: var(--color-accent-darker);
+    padding: 4px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 8px;
+    float: right;
+    cursor: pointer;
+}
+
+.button-create-counter {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+input {
+    background-color: var(--color-fg);
+    color: var(--color-text);
+    margin: 4px;
+    padding: 8px;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    width: calc(100% - 8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input:focus-visible {
+    outline: 1px solid var(--color-accent);
+}
+
+input.search-bar {
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.title-and-controls-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.button-create-counter {
+    z-index: 1;
+}
+
+@media (hover: hover) {
+    .counter-card button:hover,
+    .button-create-counter:hover {
+        scale: 1.05;
+    }
+}
+
+@media (hover: none) {
+    .counter-card button:active,
+    .button-create-counter:active {
+        scale: 1.05;
+    }
+}
+
+@media (width >= 600px) {
+    .counters-container {
+        max-width: 60%;
+        margin-inline: auto;
+    }
+
+    .counter-menu,
+    input.search-bar {
+        width: 60%;
+        left: 0px;
+        right: 0px;
+        margin-inline: auto;
+    }
+}
+
+@media (width >= 1000px) {
+    .counters-container {
+        max-width: 45%;
+        margin-inline: auto;
+    }
+
+    .counter-menu,
+    input.search-bar {
+        width: 45%;
+        left: 0px;
+        right: 0px;
+        margin-inline: auto;
+    }
+}
