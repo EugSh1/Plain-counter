@@ -4,12 +4,15 @@ import type { Counter } from "./useCounters";
 import { Plus } from "lucide-react";
 import CounterCard from "./components/CounterCard";
 import CreateCounterMenu from "./components/CreateCounterMenu";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function App() {
     const [counters, addCounter, increaseCounter, decreaseCounter, renameCounter, resetCounter, deleteCounter] =
         useCounters();
     const [isCreateCounterMenuOpen, setIsCreateCounterMenuOpen] = useState<boolean>(false);
     const [searchQuery, setSearchQuery] = useState<string>("");
+
+    const [animationParent] = useAutoAnimate();
 
     return (
         <>
@@ -36,7 +39,7 @@ export default function App() {
                 closeMenuFunction={() => setIsCreateCounterMenuOpen(false)}
             />
 
-            <div className="counters-container">
+            <div className="counters-container" ref={animationParent}>
                 {counters
                     .filter((counter: Counter) => counter.name.toLowerCase().includes(searchQuery))
                     .map((counter: Counter) => (
