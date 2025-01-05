@@ -30,10 +30,11 @@ export function useCounters() {
     }
 
     function updateCounter(id: number, delta: number): void {
-        const countersCopy = [...counters];
-        const selectedCounter = countersCopy.find((counter) => counter.id === id);
-        if (selectedCounter) selectedCounter.value += delta;
-        setCounters(countersCopy);
+        setCounters(
+            counters.map((counter) =>
+                counter.id === id ? { name: counter.name, id: counter.id, value: counter.value + delta } : counter
+            )
+        );
     }
 
     function increaseCounter(id: number): void {
@@ -45,17 +46,17 @@ export function useCounters() {
     }
 
     function renameCounter(id: number, newName: string) {
-        const countersCopy = [...counters];
-        const selectedCounter = countersCopy.find((counter) => counter.id === id);
-        if (selectedCounter) selectedCounter.name = newName;
-        setCounters(countersCopy);
+        setCounters(
+            counters.map((counter) =>
+                counter.id === id ? { name: newName, id: counter.id, value: counter.value } : counter
+            )
+        );
     }
 
     function resetCounter(id: number): void {
-        const countersCopy = [...counters];
-        const selectedCounter = countersCopy.find((counter) => counter.id === id);
-        if (selectedCounter) selectedCounter.value = 0;
-        setCounters(countersCopy);
+        setCounters(
+            counters.map((counter) => (counter.id === id ? { name: counter.name, id: counter.id, value: 0 } : counter))
+        );
     }
 
     function deleteCounter(id: number): void {
