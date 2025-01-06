@@ -31,9 +31,7 @@ export function useCounters() {
 
     function updateCounter(id: number, delta: number): void {
         setCounters(
-            counters.map((counter) =>
-                counter.id === id ? { name: counter.name, id: counter.id, value: counter.value + delta } : counter
-            )
+            counters.map((counter) => (counter.id === id ? { ...counter, value: counter.value + delta } : counter))
         );
     }
 
@@ -46,17 +44,11 @@ export function useCounters() {
     }
 
     function renameCounter(id: number, newName: string) {
-        setCounters(
-            counters.map((counter) =>
-                counter.id === id ? { name: newName, id: counter.id, value: counter.value } : counter
-            )
-        );
+        setCounters(counters.map((counter) => (counter.id === id ? { ...counter, name: newName } : counter)));
     }
 
     function resetCounter(id: number): void {
-        setCounters(
-            counters.map((counter) => (counter.id === id ? { name: counter.name, id: counter.id, value: 0 } : counter))
-        );
+        setCounters(counters.map((counter) => (counter.id === id ? { ...counter, value: 0 } : counter)));
     }
 
     function deleteCounter(id: number): void {
