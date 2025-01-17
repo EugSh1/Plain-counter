@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { Counter } from "../useCounters";
+import type { ICounter } from "../types";
 import { Plus, Minus, RotateCcw, Trash2 } from "lucide-react";
 
 interface CounterCardProps {
-    counter: Counter;
+    counter: ICounter;
     increaseCounterFunction: (id: number) => void;
     decreaseCounterFunction: (id: number) => void;
     renameCounterFunction: (id: number, newName: string) => void;

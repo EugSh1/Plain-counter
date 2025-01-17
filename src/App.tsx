@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useCounters } from "./useCounters";
-import type { Counter } from "./useCounters";
+import type { ICounter } from "./types";
 import { Plus } from "lucide-react";
 import CounterCard from "./components/CounterCard";
 import CreateCounterMenu from "./components/CreateCounterMenu";
@@ -41,8 +41,8 @@ export default function App() {
 
             <div className="counters-container" ref={animationParent}>
                 {counters
-                    .filter((counter: Counter) => counter.name.toLowerCase().includes(searchQuery))
-                    .map((counter: Counter) => (
+                    .filter((counter: ICounter) => counter.name.toLowerCase().includes(searchQuery))
+                    .map((counter: ICounter) => (
                         <CounterCard
                             key={String(counter.id)}
                             counter={counter}

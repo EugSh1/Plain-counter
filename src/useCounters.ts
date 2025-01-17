@@ -1,23 +1,18 @@
 import { useEffect, useState } from "react";
+import type { ICounter } from "./types";
 
-export interface Counter {
-    name: string;
-    id: number;
-    value: number;
+function getInitialCounters(): ICounter[] {
+    try {
+        const savedCounters = localStorage.getItem("counters");
+        return savedCounters ? JSON.parse(savedCounters) : [];
+    } catch (error) {
+        console.error("Error when retrieving data from localStorage:", error);
+        return [];
+    }
 }
 
 export function useCounters() {
-    function getInitialCounters(): Counter[] {
-        try {
-            const savedCounters = localStorage.getItem("counters");
-            return savedCounters ? JSON.parse(savedCounters) : [];
-        } catch (error) {
-            console.error("Error when retrieving data from localStorage:", error);
-            return [];
-        }
-    }
-
-    const [counters, setCounters] = useState<Counter[]>(getInitialCounters());
+    const [counters, setCounters] = useState<ICounter[]>(getInitialCounters);
 
     useEffect(() => {
         localStorage.setItem("counters", JSON.stringify(counters));
@@ -25,7 +20,7 @@ export function useCounters() {
 
     function addCounter(name: string): void {
         const id = Date.now();
-        const newCounter: Counter = { name, id, value: 0 };
+        const newCounter: ICounter = { name, id, value: 0 };
         setCounters([...counters, newCounter]);
     }
 
