@@ -29,12 +29,13 @@ html,
 body {
     margin: 0;
     padding: 0;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
 }
 
 body {
