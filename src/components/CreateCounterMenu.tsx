@@ -52,6 +52,7 @@ export default function CreateCounterMenu({
                 ref={inputRef}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNewCounterName(event.currentTarget.value)}
                 onKeyDown={(event: React.KeyboardEvent) => event.key === "Enter" && handleCreateCounter()}
+                aria-label="Enter the name for a new counter"
             />
 
             <button onClick={handleCreateCounter}>Create</button>

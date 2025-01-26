@@ -34,23 +34,40 @@ export default function CounterCard({
                     type="text"
                     value={counterName}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCounterName(event.currentTarget.value)}
+                    aria-label={`Enter the new counter name for the "${counterName}" counter`}
                 />
                 <div className="counter-options">
-                    <button onClick={() => resetCounterFunction(counter.id)} title="Reset counter">
+                    <button
+                        onClick={() => resetCounterFunction(counter.id)}
+                        title="Reset counter"
+                        aria-label={`Reset the "${counterName}" counter`}
+                    >
                         <RotateCcw />
                     </button>
-                    <button onClick={() => deleteCounterFunction(counter.id)} title="Delete counter">
+                    <button
+                        onClick={() => deleteCounterFunction(counter.id)}
+                        title="Delete counter"
+                        aria-label={`Delete the "${counterName}" counter`}
+                    >
                         <Trash2 />
                     </button>
                 </div>
             </div>
 
             <div className="counter-card-controls">
-                <button onClick={() => increaseCounterFunction(counter.id)} title="Increase counter">
+                <button
+                    onClick={() => increaseCounterFunction(counter.id)}
+                    title="Increase counter"
+                    aria-label={`Increase the "${counterName}" counter`}
+                >
                     <Plus />
                 </button>
                 <h1>{counter.value}</h1>
-                <button onClick={() => decreaseCounterFunction(counter.id)} title="Decrease counter">
+                <button
+                    onClick={() => decreaseCounterFunction(counter.id)}
+                    title="Decrease counter"
+                    aria-label={`Decrease the "${counterName}" counter`}
+                >
                     <Minus />
                 </button>
             </div>

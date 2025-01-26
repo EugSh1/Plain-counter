@@ -23,12 +23,14 @@ export default function App() {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     setSearchQuery(event.currentTarget.value.trim().toLowerCase())
                 }
+                aria-label="Search counters"
             />
 
             <button
                 className="button-create-counter"
-                title="Create new counter"
+                title="Create a new counter"
                 onClick={() => setIsCreateCounterMenuOpen(true)}
+                aria-label="Create a new counter"
             >
                 <Plus />
             </button>
