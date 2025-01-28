@@ -12,6 +12,8 @@
     --color-accent: #475e8d;
     --color-accent-darker: #ffffff;
 
+    --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
     font-family: "Roboto";
 }
 
@@ -25,10 +27,10 @@
     }
 }
 
-html,
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--color-bg);
     overscroll-behavior: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
@@ -36,10 +38,6 @@ body {
 
 * {
     box-sizing: border-box;
-}
-
-body {
-    background-color: var(--color-bg);
 }
 
 h1 {
@@ -55,14 +53,10 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
 
-.counter-card:first-child {
-    margin-top: 48px;
-}
-
-.counter-card:last-child {
-    margin-bottom: 10px;
+    &:last-child {
+        margin-bottom: 10px;
+    }
 }
 
 .counter-card button,
@@ -73,6 +67,13 @@ h1 {
     border: none;
     transition: 0.15s;
     cursor: pointer;
+}
+
+.button-create-counter {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    z-index: 1;
 }
 
 .counter-card button svg,
@@ -143,7 +144,7 @@ h1 {
     width: 100%;
     z-index: 1;
     opacity: 0;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: var(--shadow);
     pointer-events: none;
     transition: transform 0.1s ease, opacity 0.1s ease;
 }
@@ -177,12 +178,6 @@ h1 {
     cursor: pointer;
 }
 
-.button-create-counter {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-}
-
 input {
     background-color: var(--color-fg);
     color: var(--color-text);
@@ -194,15 +189,17 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &:focus-visible {
+        outline: 1px solid var(--color-accent);
+    }
 }
 
-input:focus-visible {
-    outline: 1px solid var(--color-accent);
-}
-
-input.search-bar {
-    position: fixed;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.search-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: var(--shadow);
 }
 
 .title-and-controls-container {
@@ -211,10 +208,6 @@ input.search-bar {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
-}
-
-.button-create-counter {
-    z-index: 1;
 }
 
 @media (hover: hover) {
@@ -238,7 +231,7 @@ input.search-bar {
     }
 
     .counter-menu,
-    input.search-bar {
+    .search-bar {
         width: 60%;
         left: 0px;
         right: 0px;
@@ -253,7 +246,7 @@ input.search-bar {
     }
 
     .counter-menu,
-    input.search-bar {
+    .search-bar {
         width: 45%;
         left: 0px;
         right: 0px;
