@@ -18,23 +18,23 @@ export function useCounters() {
         localStorage.setItem("counters", JSON.stringify(counters));
     }, [counters]);
 
-    function addCounter(name: string): void {
+    function addCounter(name: string) {
         const id = Date.now();
         const newCounter: ICounter = { name, id, value: 0 };
         setCounters([...counters, newCounter]);
     }
 
-    function updateCounter(id: number, delta: number): void {
+    function updateCounter(id: number, delta: number) {
         setCounters(
             counters.map((counter) => (counter.id === id ? { ...counter, value: counter.value + delta } : counter))
         );
     }
 
-    function increaseCounter(id: number): void {
+    function increaseCounter(id: number) {
         updateCounter(id, 1);
     }
 
-    function decreaseCounter(id: number): void {
+    function decreaseCounter(id: number) {
         updateCounter(id, -1);
     }
 
@@ -42,11 +42,11 @@ export function useCounters() {
         setCounters(counters.map((counter) => (counter.id === id ? { ...counter, name: newName } : counter)));
     }
 
-    function resetCounter(id: number): void {
+    function resetCounter(id: number) {
         setCounters(counters.map((counter) => (counter.id === id ? { ...counter, value: 0 } : counter)));
     }
 
-    function deleteCounter(id: number): void {
+    function deleteCounter(id: number) {
         setCounters(counters.filter((counter) => counter.id !== id));
     }
 

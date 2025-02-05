@@ -16,7 +16,7 @@ export default function CreateCounterMenu({
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
-        function handleClickOutside(event: MouseEvent): void {
+        function handleClickOutside(event: MouseEvent) {
             if (counterMenuRef.current && !counterMenuRef.current.contains(event.target as Node)) {
                 setNewCounterName("");
                 closeMenuFunction();
@@ -34,7 +34,7 @@ export default function CreateCounterMenu({
         inputRef.current?.focus();
     }, [isOpen]);
 
-    function handleCreateCounter(): void {
+    function handleCreateCounter() {
         if (newCounterName.trim() === "") return;
 
         createCounterFunction(newCounterName);
