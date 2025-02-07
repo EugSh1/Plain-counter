@@ -2,15 +2,11 @@ import { useEffect, useRef, useState } from "react";
 
 interface CreateCounterMenuProps {
     isOpen: boolean;
-    createCounterFunction: (newCounterName: string) => void;
-    closeMenuFunction: () => void;
+    createCounterFn: (newCounterName: string) => void;
+    closeMenuFn: () => void;
 }
 
-export default function CreateCounterMenu({
-    isOpen,
-    createCounterFunction,
-    closeMenuFunction
-}: CreateCounterMenuProps) {
+export default function CreateCounterMenu({ isOpen, createCounterFn, closeMenuFn }: CreateCounterMenuProps) {
     const [newCounterName, setNewCounterName] = useState<string>("");
     const counterMenuRef = useRef<HTMLDivElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -19,7 +15,7 @@ export default function CreateCounterMenu({
         function handleClickOutside(event: MouseEvent) {
             if (counterMenuRef.current && !counterMenuRef.current.contains(event.target as Node)) {
                 setNewCounterName("");
-                closeMenuFunction();
+                closeMenuFn();
             }
         }
 
@@ -37,9 +33,9 @@ export default function CreateCounterMenu({
     function handleCreateCounter() {
         if (newCounterName.trim() === "") return;
 
-        createCounterFunction(newCounterName);
+        createCounterFn(newCounterName);
         setNewCounterName("");
-        closeMenuFunction();
+        closeMenuFn();
     }
 
     return (

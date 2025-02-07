@@ -37,8 +37,8 @@ export default function App() {
 
             <CreateCounterMenu
                 isOpen={isCreateCounterMenuOpen}
-                createCounterFunction={addCounter}
-                closeMenuFunction={() => setIsCreateCounterMenuOpen(false)}
+                createCounterFn={addCounter}
+                closeMenuFn={() => setIsCreateCounterMenuOpen(false)}
             />
 
             <div className="counters-container" ref={animationParent}>
@@ -48,11 +48,11 @@ export default function App() {
                         <CounterCard
                             key={String(counter.id)}
                             counter={counter}
-                            increaseCounterFunction={increaseCounter}
-                            decreaseCounterFunction={decreaseCounter}
-                            renameCounterFunction={renameCounter}
-                            resetCounterFunction={resetCounter}
-                            deleteCounterFunction={deleteCounter}
+                            increaseCounterFn={increaseCounter}
+                            decreaseCounterFn={decreaseCounter}
+                            renameCounterFn={renameCounter}
+                            resetCounterFn={resetCounter}
+                            deleteCounterFn={deleteCounter}
                         />
                     ))}
             </div>

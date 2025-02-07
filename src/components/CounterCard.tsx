@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import type { ICounter } from "../types";
 import { Plus, Minus, RotateCcw, Trash2 } from "lucide-react";
 
 interface CounterCardProps {
     counter: ICounter;
-    increaseCounterFunction: (id: number) => void;
-    decreaseCounterFunction: (id: number) => void;
-    renameCounterFunction: (id: number, newName: string) => void;
-    resetCounterFunction: (id: number) => void;
-    deleteCounterFunction: (id: number) => void;
+    increaseCounterFn: (id: number) => void;
+    decreaseCounterFn: (id: number) => void;
+    renameCounterFn: (id: number, newName: string) => void;
+    resetCounterFn: (id: number) => void;
+    deleteCounterFn: (id: number) => void;
 }
 
-export default function CounterCard({
+function CounterCard({
     counter,
-    increaseCounterFunction,
-    decreaseCounterFunction,
-    renameCounterFunction,
-    resetCounterFunction,
-    deleteCounterFunction
+    increaseCounterFn,
+    decreaseCounterFn,
+    renameCounterFn,
+    resetCounterFn,
+    deleteCounterFn
 }: CounterCardProps) {
     const [counterName, setCounterName] = useState<string>(counter.name);
 
     useEffect(() => {
         if (counterName === counter.name) return;
-        renameCounterFunction(counter.id, counterName);
+        renameCounterFn(counter.id, counterName);
     }, [counterName]);
 
     return (
@@ -38,14 +38,14 @@ export default function CounterCard({
                 />
                 <div className="counter-options">
                     <button
-                        onClick={() => resetCounterFunction(counter.id)}
+                        onClick={() => resetCounterFn(counter.id)}
                         title="Reset counter"
                         aria-label={`Reset the "${counterName}" counter`}
                     >
                         <RotateCcw />
                     </button>
                     <button
-                        onClick={() => deleteCounterFunction(counter.id)}
+                        onClick={() => deleteCounterFn(counter.id)}
                         title="Delete counter"
                         aria-label={`Delete the "${counterName}" counter`}
                     >
@@ -56,7 +56,7 @@ export default function CounterCard({
 
             <div className="counter-card-controls">
                 <button
-                    onClick={() => increaseCounterFunction(counter.id)}
+                    onClick={() => increaseCounterFn(counter.id)}
                     title="Increase counter"
                     aria-label={`Increase the "${counterName}" counter`}
                 >
@@ -64,7 +64,7 @@ export default function CounterCard({
                 </button>
                 <h1>{counter.value}</h1>
                 <button
-                    onClick={() => decreaseCounterFunction(counter.id)}
+                    onClick={() => decreaseCounterFn(counter.id)}
                     title="Decrease counter"
                     aria-label={`Decrease the "${counterName}" counter`}
                 >
@@ -74,3 +74,5 @@ export default function CounterCard({
         </div>
     );
 }
+
+export default memo(CounterCard);

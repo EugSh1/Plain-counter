@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { ICounter } from "./types";
 
 function getInitialCounters(): ICounter[] {
@@ -21,34 +21,38 @@ export function useCounters() {
     function addCounter(name: string) {
         const id = Date.now();
         const newCounter: ICounter = { name, id, value: 0 };
-        setCounters([...counters, newCounter]);
+        setCounters((prevCounters) => [...prevCounters, newCounter]);
     }
 
     function updateCounter(id: number, delta: number) {
-        setCounters(
-            counters.map((counter) => (counter.id === id ? { ...counter, value: counter.value + delta } : counter))
+        setCounters((prevCounters) =>
+            prevCounters.map((counter) => (counter.id === id ? { ...counter, value: counter.value + delta } : counter))
         );
     }
 
-    function increaseCounter(id: number) {
+    const increaseCounter = useCallback((id: number) => {
         updateCounter(id, 1);
-    }
+    }, []);
 
-    function decreaseCounter(id: number) {
+    const decreaseCounter = useCallback((id: number) => {
         updateCounter(id, -1);
-    }
+    }, []);
 
-    function renameCounter(id: number, newName: string) {
-        setCounters(counters.map((counter) => (counter.id === id ? { ...counter, name: newName } : counter)));
-    }
+    const renameCounter = useCallback((id: number, newName: string) => {
+        setCounters((prevCounters) =>
+            prevCounters.map((counter) => (counter.id === id ? { ...counter, name: newName } : counter))
+        );
+    }, []);
 
-    function resetCounter(id: number) {
-        setCounters(counters.map((counter) => (counter.id === id ? { ...counter, value: 0 } : counter)));
-    }
+    const resetCounter = useCallback((id: number) => {
+        setCounters((prevCounters) =>
+            prevCounters.map((counter) => (counter.id === id ? { ...counter, value: 0 } : counter))
+        );
+    }, []);
 
-    function deleteCounter(id: number) {
-        setCounters(counters.filter((counter) => counter.id !== id));
-    }
+    const deleteCounter = useCallback((id: number) => {
+        setCounters((prevCounters) => prevCounters.filter((counter) => counter.id !== id));
+    }, []);
 
     return [
         counters,
