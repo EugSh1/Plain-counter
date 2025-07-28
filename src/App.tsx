@@ -7,8 +7,15 @@ import CreateCounterMenu from "./components/CreateCounterMenu";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function App() {
-    const [counters, addCounter, increaseCounter, decreaseCounter, renameCounter, resetCounter, deleteCounter] =
-        useCounters();
+    const [
+        counters,
+        addCounter,
+        increaseCounter,
+        decreaseCounter,
+        renameCounter,
+        resetCounter,
+        deleteCounter
+    ] = useCounters();
     const [isCreateCounterMenuOpen, setIsCreateCounterMenuOpen] = useState<boolean>(false);
     const [searchQuery, setSearchQuery] = useState<string>("");
 

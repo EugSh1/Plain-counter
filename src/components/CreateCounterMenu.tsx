@@ -6,7 +6,11 @@ interface CreateCounterMenuProps {
     closeMenuFn: () => void;
 }
 
-export default function CreateCounterMenu({ isOpen, createCounterFn, closeMenuFn }: CreateCounterMenuProps) {
+export default function CreateCounterMenu({
+    isOpen,
+    createCounterFn,
+    closeMenuFn
+}: Readonly<CreateCounterMenuProps>) {
     const [newCounterName, setNewCounterName] = useState<string>("");
     const counterMenuRef = useRef<HTMLDivElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -39,15 +43,22 @@ export default function CreateCounterMenu({ isOpen, createCounterFn, closeMenuFn
     }
 
     return (
-        <div className={`counter-menu ${isOpen ? "counter-menu-open" : "counter-menu-closed"}`} ref={counterMenuRef}>
+        <div
+            className={`counter-menu ${isOpen ? "counter-menu-open" : "counter-menu-closed"}`}
+            ref={counterMenuRef}
+        >
             <h1>Create counter</h1>
             <input
                 type="text"
                 placeholder="Name"
                 value={newCounterName}
                 ref={inputRef}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNewCounterName(event.currentTarget.value)}
-                onKeyDown={(event: React.KeyboardEvent) => event.key === "Enter" && handleCreateCounter()}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    setNewCounterName(event.currentTarget.value)
+                }
+                onKeyDown={(event: React.KeyboardEvent) =>
+                    event.key === "Enter" && handleCreateCounter()
+                }
                 aria-label="Enter the name for a new counter"
             />
 

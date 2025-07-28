@@ -18,7 +18,7 @@ function CounterCard({
     renameCounterFn,
     resetCounterFn,
     deleteCounterFn
-}: CounterCardProps) {
+}: Readonly<CounterCardProps>) {
     const [counterName, setCounterName] = useState<string>(counter.name);
 
     useEffect(() => {
@@ -33,7 +33,9 @@ function CounterCard({
                     className="counter-name"
                     type="text"
                     value={counterName}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCounterName(event.currentTarget.value)}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setCounterName(event.currentTarget.value)
+                    }
                     aria-label={`Enter the new counter name for the "${counterName}" counter`}
                 />
                 <div className="counter-options">

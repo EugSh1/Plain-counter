@@ -26,7 +26,9 @@ export function useCounters() {
 
     function updateCounter(id: number, delta: number) {
         setCounters((prevCounters) =>
-            prevCounters.map((counter) => (counter.id === id ? { ...counter, value: counter.value + delta } : counter))
+            prevCounters.map((counter) =>
+                counter.id === id ? { ...counter, value: counter.value + delta } : counter
+            )
         );
     }
 
@@ -40,7 +42,9 @@ export function useCounters() {
 
     const renameCounter = useCallback((id: number, newName: string) => {
         setCounters((prevCounters) =>
-            prevCounters.map((counter) => (counter.id === id ? { ...counter, name: newName } : counter))
+            prevCounters.map((counter) =>
+                counter.id === id ? { ...counter, name: newName } : counter
+            )
         );
     }, []);
 
